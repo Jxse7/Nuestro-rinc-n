@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💗 Proyecto Nosotros</title>
+
+<style>
+body{
+margin:0;
+font-family:Georgia, serif;
+background: radial-gradient(#0b0b1a, #050510);
+color:white;
+overflow-x:hidden;
+}
+
+/* estrellas */
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-2;
+}
+
+/* corazones */
+.heart{
+position:fixed;
+color:#ff4f88;
+font-size:20px;
+animation: float 7s linear infinite;
+opacity:0.8;
+pointer-events:none;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh); opacity:0;}
+20%{opacity:1;}
+100%{transform:translateY(-120vh); opacity:0;}
+}
+
+/* layouts */
+section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:40px;
+}
+
+h1{
+font-size:50px;
+margin-bottom:10px;
+}
+
+h2{
+font-size:30px;
+margin-bottom:20px;
+}
+
+p{
+max-width:800px;
+font-size:20px;
+line-height:1.7;
+}
+
+/* botones */
+button{
+margin-top:30px;
+padding:15px 30px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+background:#ff4f88;
+color:white;
+font-size:18px;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+background:#ff78a6;
+}
+
+/* cartas */
+.card{
+background:rgba(255,255,255,0.07);
+padding:20px;
+margin:15px;
+border-radius:15px;
+cursor:pointer;
+transition:0.3s;
+width:min(600px,90%);
+}
+
+.card:hover{
+transform:scale(1.03);
+}
+
+.message{
+display:none;
+margin-top:10px;
+font-size:18px;
+color:#ffd1e0;
+}
+
+/* luna */
+.moon{
+font-size:60px;
+cursor:pointer;
+margin-top:20px;
+}
+
+.hidden{display:none;}
+
+footer{
+margin-top:50px;
+font-size:12px;
+opacity:0.6;
+text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<!-- INTRO -->
+<section>
+<h1>✨ Proyecto Nosotros</h1>
+<h2>Un lugar que crece con nosotros</h2>
+
+<p>
+Hola, amor.<br><br>
+
+Si estás aquí, significa que decidí construir un pequeño rincón donde pueda guardar todo lo que siento por ti.<br><br>
+
+Esto apenas comienza.
+</p>
+
+<button onclick="start()">Entrar 💗</button>
+</section>
+
+<!-- CARTA -->
+<section id="main" class="hidden">
+
+<h2>💌 Carta</h2>
+
+<p>
+No existe una fecha especial para esto.<br><br>
+
+Simplemente quería crear un lugar donde pudiera dejar un pedacito de todo lo que siento por ti.<br><br>
+
+Tal vez hoy sea pequeño, pero crecerá con nosotros.<br><br>
+
+Ojalá algún día podamos leer esto juntos.<br><br>
+
+Te amo muchísimo. 💗
+</p>
+
+</section>
+
+<!-- SOBRES -->
+<section id="letters" class="hidden">
+
+<h2>💌 Sobres</h2>
+
+<div class="card" onclick="openCard(this)">
+✉️ Gracias por existir
+<div class="message">Eres una de las mejores cosas que me han pasado.</div>
+</div>
+
+<div class="card" onclick="openCard(this)">
+✉️ Sonrisa
+<div class="message">Espero que esto te saque una sonrisa hoy.</div>
+</div>
+
+<div class="card" onclick="openCard(this)">
+✉️ Nosotros
+<div class="message">Prometo seguir llenando este lugar de nosotros.</div>
+</div>
+
+<div class="card" onclick="openCard(this)">
+✉️ Inicio
+<div class="message">Este es solo el comienzo 💗</div>
+</div>
+
+</section>
+
+<!-- LUNA -->
+<section id="moonSec" class="hidden">
+
+<h2>🌙 Toca la luna</h2>
+
+<div class="moon" onclick="moon()">🌙</div>
+
+<p id="moonText"></p>
+
+</section>
+
+<!-- REGISTRO -->
+<section id="log" class="hidden">
+
+<h2>📜 Registro del desarrollador</h2>
+
+<p>
+Versión 1.0<br><br>
+
+✔ Se creó el pequeño rincón.<br>
+✔ Se añadieron cartas iniciales.<br>
+✔ Corazones implementados.<br><br>
+
+Notas:<br>
+Gracias por existir.<br><br>
+
+— José 💗
+</p>
+
+</section>
+
+<footer>
+Proyecto Nosotros — v1.0 💗
+</footer>
+
+<script>
+
+// INTRO FLOW
+function start(){
+document.getElementById("main").classList.remove("hidden");
+document.getElementById("letters").classList.remove("hidden");
+document.getElementById("moonSec").classList.remove("hidden");
+document.getElementById("log").classList.remove("hidden");
+window.scrollTo({top:window.innerHeight, behavior:"smooth"});
+}
+
+// CARTAS
+function openCard(el){
+let msg = el.querySelector(".message");
+msg.style.display = msg.style.display === "block" ? "none" : "block";
+}
+
+// LUNA
+function moon(){
+document.getElementById("moonText").innerHTML =
+"Me gusta pensar que cuando miras la luna... yo también la estoy viendo contigo 💗";
+}
+
+// CORAZONES
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="💗";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(15+Math.random()*20)+"px";
+h.style.animationDuration=(4+Math.random()*5)+"s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),8000);
+},300);
+
+// ESTRELLAS
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<150;i++){
+stars.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2
+});
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";
+stars.forEach(s=>{
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+ctx.fill();
+});
+requestAnimationFrame(draw);
+}
+draw();
+
+</script>
+
+</body>
+</html>
