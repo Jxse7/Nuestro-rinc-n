@@ -241,17 +241,19 @@ Proyecto Nosotros — v1.0 💗
 </audio>
 
 <script>
- function toggleMusic(){
+function toggleMusic(){
   const music = document.getElementById("music");
 
-  music.volume = 0.5; // importante
+  music.volume = 0.5;
 
-  music.play().catch(err => {
-    console.log("Error de audio:", err);
-    alert("El navegador bloqueó el audio. Dale click otra vez 🎵");
-  });
+  if (music.paused) {
+    music.play().catch(err => {
+      console.log("Error de audio:", err);
+    });
+  } else {
+    music.pause();
+  }
 }
-  
 // INTRO FLOW
 function start(){
 document.getElementById("main").classList.remove("hidden");
