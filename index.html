@@ -236,7 +236,7 @@ Gracias por existir y hablar  conmigo... Te amo<br><br>
 <footer>
 Proyecto Nosotros — v1.0 💗
 </footer>
-  <audio id="music" loop preload="auto">
+<audio id="music" loop preload="auto">
   <source src="musica/cuco.mp3" type="audio/mpeg">
 </audio>
 
@@ -247,9 +247,17 @@ function toggleMusic(){
   music.volume = 0.5;
 
   if (music.paused) {
-    music.play().catch(err => {
-      console.log("Error de audio:", err);
-    });
+    const playPromise = music.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          console.log("Reproduciendo 🎵");
+        })
+        .catch(err => {
+          console.log("Error de audio:", err);
+        });
+    }
   } else {
     music.pause();
   }
